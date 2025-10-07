@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "run-notebook"
+name = "run-ipynb"
 version = "0.1.0"
 description = "A tool to run Jupyter notebooks as Python scripts"
 authors = [
@@ -12,11 +12,11 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
-    "jupyter",
+    "jupyter==1.1.1",
 ]
 
 [project.scripts]
-run-notebook = "run_notebook.cli:main"
+run-ipynb = "run_ipynb.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["run_notebook"]
+packages = ["run_ipynb"]

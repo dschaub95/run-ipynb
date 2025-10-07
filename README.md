@@ -1,4 +1,4 @@
-### run-notebook
+### run-ipynb
 
 Run Jupyter notebooks as plain Python scripts from the command line.
 
@@ -8,19 +8,19 @@ This tool converts a `.ipynb` to `.py`, removes IPython-only lines, ensures a no
 
 - **Requirements**: Python >= 3.7
 
-Install directly from Git using pip. If this project lives inside a monorepo under `tools/run-notebook`, use the `subdirectory` fragment:
+Install directly from Git using pip:
 
 ```bash
 # HTTPS
-pip install "git+https://github.com/dschaub95/run-notebook.git#subdirectory=tools/run-notebook"
+pip install "git+https://github.com/dschaub95/run-ipynb"
 ```
 
-After installation, a CLI named `run-notebook` will be available.
+After installation, a CLI named `run-ipynb` will be available.
 
 ## Usage
 
 ```bash
-run-notebook path/to/notebook.ipynb [--keep] [--yes]
+run-ipynb path/to/notebook.ipynb [--keep] [--yes]
 ```
 
 - **notebook_path**: Path to the `.ipynb` notebook to run
@@ -31,10 +31,10 @@ run-notebook path/to/notebook.ipynb [--keep] [--yes]
 
 ```bash
 # Basic: convert, run, and remove the temporary .py file
-run-notebook notebooks/analysis.ipynb
+run-ipynb notebooks/analysis.ipynb
 
 # Keep the .py file for inspection and overwrite if it already exists
-run-notebook notebooks/analysis.ipynb --keep --yes
+run-ipynb notebooks/analysis.ipynb --keep --yes
 ```
 
 ### What it does
