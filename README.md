@@ -1,24 +1,21 @@
-### run-ipynb
+## run-ipynb
 
 Run Jupyter notebooks as plain Python scripts from the command line.
 
 This tool converts a `.ipynb` to `.py`, removes IPython-only lines, ensures a non-interactive Matplotlib backend, optionally adjusts `sys.path` when `os.chdir(...)` is used, executes the script, and cleans up the generated file by default.
 
-## Installation
-
-- **Requirements**: Python >= 3.7
-
-Install directly from Git using pip:
-
-```bash
-# HTTPS
-pip install "git+https://github.com/dschaub95/run-ipynb"
-```
-
-After installation, a CLI named `run-ipynb` will be available.
-
 ## Usage
 
+You can directly use the tool with `uv`:
+```bash
+uvx run-ipynb path/to/notebook.ipynb [--keep] [--yes]
+```
+
+Otherwise run:
+```bash
+pip install run-ipynb
+```
+and then:
 ```bash
 run-ipynb path/to/notebook.ipynb [--keep] [--yes]
 ```
@@ -31,10 +28,10 @@ run-ipynb path/to/notebook.ipynb [--keep] [--yes]
 
 ```bash
 # Basic: convert, run, and remove the temporary .py file
-run-ipynb notebooks/analysis.ipynb
+uvx run-ipynb notebooks/analysis.ipynb
 
 # Keep the .py file for inspection and overwrite if it already exists
-run-ipynb notebooks/analysis.ipynb --keep --yes
+uvx run-ipynb notebooks/analysis.ipynb --keep --yes
 ```
 
 ### What it does
@@ -45,8 +42,3 @@ run-ipynb notebooks/analysis.ipynb --keep --yes
 - If `os.chdir(...)` is detected, appends `os.getcwd()` to `sys.path` right after the change
 - Executes the resulting script with your current Python interpreter
 - Deletes the generated `.py` file unless `--keep` is passed
-
-## Notes
-
-- `jupyter` is installed as a dependency and must be available on your `PATH` for `nbconvert` to work.
-
