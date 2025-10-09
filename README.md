@@ -11,6 +11,19 @@ You can directly use the tool with `uv`:
 uvx run-ipynb path/to/notebook.ipynb [--keep] [--yes]
 ```
 
+Optionally specify a Python interpreter:
+
+```bash
+uvx run-ipynb path/to/notebook.ipynb --python /path/to/python
+```
+
+You can also rely on your current shell's interpreter by setting `RUN_IPYNB_PYTHON`:
+
+```bash
+export RUN_IPYNB_PYTHON=$(which python)
+uvx run-ipynb path/to/notebook.ipynb
+```
+
 Otherwise run:
 ```bash
 pip install run-ipynb
@@ -23,6 +36,15 @@ run-ipynb path/to/notebook.ipynb [--keep] [--yes]
 - **notebook_path**: Path to the `.ipynb` notebook to run
 - **-k, --keep**: Keep the generated `.py` file after execution
 - **-y, --yes**: Automatically overwrite an existing `.py` file without prompting
+- **-p, --python**: Python interpreter to execute the generated script (defaults to the current interpreter)
+
+If `--python` is not provided, `run-ipynb` checks in order:
+
+- `RUN_IPYNB_PYTHON`
+- `RUN_IPYNB_ENV_PYTHON`
+- active virtual environments (`VIRTUAL_ENV`, `CONDA_PREFIX`, `MAMBA_PREFIX`, Pipenv, Poetry, etc.)
+- `which python`
+- the interpreter running the CLI
 
 ### Examples
 
