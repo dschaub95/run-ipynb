@@ -32,7 +32,14 @@ def resolve_python_from_path(path_candidate):
 def resolve_python_executable(args):
     explicit = args.python_executable or os.environ.get("RUN_IPYNB_PYTHON")
     if explicit:
+        print(f"Using Python executable from explicit argument: {explicit}")
         return explicit
+
+    if "venv" in sys.executable:
+        print(
+            f"Using Python executable from sys.executable (venv detected): {sys.executable}"
+        )
+        return sys.executable
 
     env_root_vars = []
 
@@ -67,6 +74,7 @@ def resolve_python_executable(args):
     for env_root in env_root_vars:
         resolved = resolve_python_from_path(env_root)
         if resolved:
+            print(f"Using Python executable from environment root variable: {resolved}")
             return resolved
 
     interpreter_vars = [
@@ -84,12 +92,15 @@ def resolve_python_executable(args):
     for candidate in interpreter_vars:
         resolved = resolve_python_from_path(candidate)
         if resolved:
+            print(f"Using Python executable from interpreter variable: {resolved}")
             return resolved
-
+    
     python_from_path = shutil.which("python")
     if python_from_path:
+        print(f"Using Python executable from shutil.which: {python_from_path}")
         return python_from_path
 
+    print(f"Using Python executable from sys.executable: {sys.executable}")
     return sys.executable
 
 
